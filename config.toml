@@ -1,0 +1,48 @@
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+default_permissions = "main"
+web_search = "live"
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"
+
+[tools.update_plan]
+enabled = true
+
+[features]
+multi_agent = true
+network_proxy = true
+daemon_auto_start = false
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 4
+max_depth = 16
+interrupt_message = true
+
+[permissions.main]
+extends = ":workspace"
+
+[permissions.main.filesystem]
+"~/.agents/librarian" = "write"
+"/tmp/codex" = "write"
+"~/.agents/skills" = "read"
+
+[permissions.main.network]
+enabled = true
+
+[permissions.main.network.domains]
+"*" = "allow"
+
+[marketplaces.alexandru]
+source_type = "git"
+source = "https://github.com/alexandru/skills.git"
+
+[marketplaces.mattpocock]
+source_type = "git"
+source = "https://github.com/mattpocock/skills.git"
+
+[plugins."alexandru-skills@alexandru"]
+enabled = true
+
+[plugins."mattpocock-skills@mattpocock"]
+enabled = true
